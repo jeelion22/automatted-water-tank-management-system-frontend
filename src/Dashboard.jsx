@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./Dashboard.css";
+import silent from "../src/assets/silent.png";
+import loud from "../src/assets/loud.png";
 
 const Dashboard = () => {
   const [pumpStatus, setPumpStatus] = useState(true);
@@ -8,6 +10,7 @@ const Dashboard = () => {
   const [gasQuality, setGasQuality] = useState(25);
   const [waterLevel, setWaterLevel] = useState(85);
   const [solarEnergyConsumption, setSolarEnergyConsumption] = useState(49);
+  const [isBuzzed, setIsBuzzed] = useState(false);
 
   return (
     <div className="container">
@@ -112,9 +115,11 @@ const Dashboard = () => {
                   style={{ backgroundColor: isOverflow ? "green" : "yellow" }}
                 ></span>
 
-                <div className="buzzer">
-                  <div className="inner-buzzer"></div>
-                </div>
+                {isBuzzed ? (
+                  <img src={loud} alt="Buzzered" />
+                ) : (
+                  <img src={silent} alt="Unbuzzered" />
+                )}
               </div>
 
               <div className="switch-container">
