@@ -1,28 +1,83 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
 import silent from "../src/assets/silent.png";
 import loud from "../src/assets/loud.png";
+import productServices from "../services/productServices";
 
 const Dashboard = () => {
   const [pumpStatus, setPumpStatus] = useState(true);
-  const [isOverflow, setIsOverflow] = useState(true);
-  const [isSwitched, setIsSwitched] = useState(false);
-  const [gasQuality, setGasQuality] = useState(25);
-  const [waterLevel, setWaterLevel] = useState(85);
-  const [solarEnergyConsumption, setSolarEnergyConsumption] = useState(49);
+  const [isOverflow, setIsOverflow] = useState(false);
+  const [gasQuality, setGasQuality] = useState(0);
+  const [waterLevel, setWaterLevel] = useState(0);
+  const [solarEnergyConsumption, setSolarEnergyConsumption] = useState(0);
   const [isBuzzed, setIsBuzzed] = useState(false);
+
+  // call for generate data
+  useEffect(() => {
+    const generateData = setInterval(() => {
+      productServices
+        .generateData()
+        .then((response) => console.log(response))
+        .catch((error) => console.log(error));
+    }, 10 * 1000); // 10 seconds
+
+    return () => clearInterval(generateData);
+  }, []);
+
+  // call for get data
+  useEffect(() => {
+    productServices;
+    const getData = setInterval(() => {
+      productServices
+        .getProductData()
+        .then((result) => {
+          const res = result.data.data.data;
+          const currentData = res[res.length - 1];
+          console.log(currentData);
+          setWaterLevel(Number(currentData.floatSensor));
+          setGasQuality(Number(currentData.gaseSensor / 5000) * 100);
+          setSolarEnergyConsumption(
+            Number((currentData["solar-sensor"] / 1000) * 100)
+          );
+
+          if (Number(currentData.floatSensor) > 80) {
+            setIsOverflow(true);
+            setPumpStatus(false);
+          } else if (Number(currentData.floatSensor) < 10) {
+            setIsOverflow(false);
+            setPumpStatus(true);
+            setIsBuzzed(true);
+          } else {
+            setIsBuzzed(false);
+          }
+        })
+        .catch((error) => console.log(error));
+    }, 5 * 1000); //5 seconds
+
+    return () => clearInterval(getData);
+  }, []);
 
   return (
     <div className="container">
-      <div className="row ">
-        <h2 className="title">Automated Water Level Management System</h2>
+      <div className="row dashboard">
+        {/* dashboard title */}
+
+        <h2 className="title">
+          Automated Water Level Management System <br />
+          Dashboard
+        </h2>
       </div>
+
+      {/* dashboard container */}
+
       <div className="row dashbord-container">
         <div className="col sensors-readings">
           <div
             class="card border-primary mb-3"
             style={{ "max-width": "18rem;" }}
           >
+            {/* water level monitor card */}
+
             <div class="card-header">Water Level</div>
             <div class="card-body text-primary">
               <h5 class="card-title">Status: </h5>
@@ -41,6 +96,8 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
+
+          {/* gas buildup monitor card */}
 
           <div
             class="card border-primary mb-3"
@@ -64,6 +121,8 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
+
+          {/* solar power consumption card */}
 
           <div
             class="card border-primary mb-3"
@@ -89,6 +148,8 @@ const Dashboard = () => {
           </div>
         </div>
 
+        {/* status board card */}
+
         <div className="col status-board">
           <div
             class="card border-primary mb-3"
@@ -96,42 +157,35 @@ const Dashboard = () => {
           >
             <div class="card-header">Control Pannel</div>
             <div class="card-body text-primary">
-              <h5 class="card-title">Status</h5>
-
               <div className="status">
-                <span>Pump Status:</span>
+                <h5>Pump Status: </h5>
                 <span
                   className="pump-status"
                   style={{ color: pumpStatus ? "green" : "red" }}
                 >
-                  {pumpStatus ? "On" : "Off"}
+                  {pumpStatus ? "ON" : "OFF"}
                 </span>
               </div>
               <div className="light-buzzer-container">
-                <span>Overflow: </span>
+                <h5>Overflow: </h5>
 
-                <span
+                <div
                   className="overflow-light"
-                  style={{ backgroundColor: isOverflow ? "green" : "yellow" }}
-                ></span>
-
-                {isBuzzed ? (
-                  <img src={loud} alt="Buzzered" />
-                ) : (
-                  <img src={silent} alt="Unbuzzered" />
-                )}
+                  style={{ backgroundColor: isOverflow ? "red" : "green" }}
+                ></div>
               </div>
 
-              <div className="switch-container">
-                <div>Switch motor: </div>
-                <button
-                  className={`btn ${isSwitched ? "btn-danger" : "btn-success"}`}
-                  onClick={() => {
-                    setIsSwitched((pre) => !pre);
-                  }}
-                >
-                  {isSwitched ? "Off" : "On"}
-                </button>
+              <div className="water-low">
+                <h5>Water Shortage Buzzer:</h5>
+                {isBuzzed ? (
+                  <div className="water-shortage">
+                    <img src={loud} alt="Buzzered" />
+                  </div>
+                ) : (
+                  <div className="water-shortage">
+                    <img src={silent} alt="Unbuzzered" />
+                  </div>
+                )}
               </div>
             </div>
           </div>

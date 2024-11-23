@@ -6,7 +6,7 @@
     height: 100vh;
     justify-content: center;
     align-items: center;
-    background-color: aquamarine;
+    background-color: rgb(152, 153, 209);
 }
 
 .sensors-readings {
@@ -42,12 +42,6 @@
     border-radius: 50%;
 }
 
-.light-buzzer-container {
-    display: flex;
-    /* justify-content: center; */
-    align-items: center;
-    gap: 50px;
-}
 
 
 .container h6 {
@@ -63,28 +57,26 @@
 .overflow {
     display: flex;
 }
-/* 
-.switch-container {
-    display: flex;
-    flex-direction: row;
-    
-    align-items: center;
-    text-align: center;
-    gap: 5px;
-
-
-} */
-
 
 
 .title {
     margin: 25px;
     padding: 10px auto;
     text-align: center;
-    color: black;
+    color: rgb(232, 230, 238);
+    font-weight: bold;
     
 }
 
 .conatiner .card {
     border: none;
 }
+
+.status-board .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 1rem;
+    
+}
+
