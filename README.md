@@ -7,7 +7,9 @@ This UI interface is a dashboard for live monitoring for automatted water tank m
 - [Introduction](#introduction)
 - [Technolgies Used](#technologies-used)
 - [Application Link](#application-link)
-- [Application Images](#application-images)
+- [APIs Link](#apis-link)
+- [Backend Link](#backend-link)
+- [Application Dashboard](#application-images)
 - [Installation](#installation)
 - [Contribution](#contributing)
 - [Usage](#usage)
@@ -47,9 +49,9 @@ The below images are about how our web application looks like.
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/jeelion22/automatted-water-tank-management-system-backend.git
+   git clone https://github.com/jeelion22/automatted-water-tank-management-system-frontend.git
 
-   cd automatted-water-tank-management-system-backend.git
+   cd automatted-water-tank-management-system-frontend.git
 
    ```
 
@@ -88,7 +90,7 @@ Contributions are crucial to enhancing the security, reliability, and functional
 - **Collaboration**: Work together with the community and maintain open communication.
 - **Quality Assurance**: Follow best practices for code quality, security, and performance.
 
-Your contributions are valued and essential in making Travel-Planner-India a secure and reliable platform for planning trips for individuals in need.
+Your contributions are valued and essential in making the app a secure and reliable platform for experience for individuals in need IoT applications.
 
 ## License
 
