@@ -78,7 +78,7 @@ const Dashboard = () => {
           >
             {/* water level monitor card */}
 
-            <div class="card-header">Water Level</div>
+            <div class="card-header">Live Water Level</div>
             <div class="card-body text-primary">
               <h5 class="card-title">Status: </h5>
               <div
@@ -103,7 +103,7 @@ const Dashboard = () => {
             class="card border-primary mb-3"
             style={{ "max-width": "18rem;" }}
           >
-            <div class="card-header">Hazardous Gas Level</div>
+            <div class="card-header">Live hazardous Gas Build Up Level</div>
             <div class="card-body text-primary">
               <h5 class="card-title">Status: </h5>
               <div
@@ -128,7 +128,7 @@ const Dashboard = () => {
             class="card border-primary mb-3"
             style={{ "max-width": "18rem;" }}
           >
-            <div class="card-header">Solar Energy Consumption</div>
+            <div class="card-header">Live Solar Energy Consumption Level</div>
             <div class="card-body text-primary">
               <h5 class="card-title">Status: </h5>
               <div
