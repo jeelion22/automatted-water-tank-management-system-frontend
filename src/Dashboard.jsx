@@ -12,28 +12,25 @@ const Dashboard = () => {
   const [solarEnergyConsumption, setSolarEnergyConsumption] = useState(0);
   const [isBuzzed, setIsBuzzed] = useState(false);
 
-  // call for generate data
+  // Fetch data periodically
   useEffect(() => {
     const generateData = setInterval(() => {
       productServices
         .generateData()
         .then((response) => console.log(response))
         .catch((error) => console.log(error));
-    }, 10 * 1000); // 10 seconds
+    }, 10 * 1000);
 
     return () => clearInterval(generateData);
   }, []);
 
-  // call for get data
   useEffect(() => {
-    productServices;
     const getData = setInterval(() => {
       productServices
         .getProductData()
         .then((result) => {
           const res = result.data.data.data;
           const currentData = res[res.length - 1];
-          console.log(currentData);
           setWaterLevel(Number(currentData.floatSensor));
           setGasQuality(Number(currentData.gaseSensor / 5000) * 100);
           setSolarEnergyConsumption(
@@ -52,142 +49,73 @@ const Dashboard = () => {
           }
         })
         .catch((error) => console.log(error));
-    }, 5 * 1000); //5 seconds
+    }, 5 * 1000);
 
     return () => clearInterval(getData);
   }, []);
 
   return (
-    <div className="container">
-      <div className="row dashboard">
-        {/* dashboard title */}
-
-        <h2 className="title">
-          Automated Water Level Management System <br />
-          Dashboard
-        </h2>
-      </div>
-
-      {/* dashboard container */}
-
-      <div className="row dashbord-container">
-        <div className="col sensors-readings">
-          <div
-            class="card border-primary mb-3"
-            style={{ "max-width": "18rem;" }}
-          >
-            {/* water level monitor card */}
-
-            <div class="card-header">Live Water Level</div>
-            <div class="card-body text-primary">
-              <h5 class="card-title">Status: </h5>
-              <div
-                class="progress"
-                role="progressbar"
-                aria-label="Basic example"
-                aria-valuenow="100"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              >
-                <div
-                  class="progress-bar"
-                  style={{ width: `${waterLevel}%` }}
-                ></div>
-              </div>
-            </div>
+    <div className="dashboard-container">
+      <header className="dashboard-header">
+        <h1>Automated Water Level Management System</h1>
+        <h2>Dashboard</h2>
+      </header>
+      <div className="dashboard-grid">
+        <div className="card">
+          <h3>Live Water Level</h3>
+          <div className="progress-bar">
+            <div
+              className="progress-fill"
+              style={{ width: `${waterLevel}%` }}
+            ></div>
           </div>
-
-          {/* gas buildup monitor card */}
-
-          <div
-            class="card border-primary mb-3"
-            style={{ "max-width": "18rem;" }}
-          >
-            <div class="card-header">Live hazardous Gas Build Up Level</div>
-            <div class="card-body text-primary">
-              <h5 class="card-title">Status: </h5>
-              <div
-                class="progress"
-                role="progressbar"
-                aria-label="Basic example"
-                aria-valuenow="100"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              >
-                <div
-                  class="progress-bar"
-                  style={{ width: `${gasQuality}%` }}
-                ></div>
-              </div>
-            </div>
-          </div>
-
-          {/* solar power consumption card */}
-
-          <div
-            class="card border-primary mb-3"
-            style={{ "max-width": "18rem;" }}
-          >
-            <div class="card-header">Live Solar Energy Consumption Level</div>
-            <div class="card-body text-primary">
-              <h5 class="card-title">Status: </h5>
-              <div
-                class="progress"
-                role="progressbar"
-                aria-label="Basic example"
-                aria-valuenow="100"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              >
-                <div
-                  class="progress-bar"
-                  style={{ width: `${solarEnergyConsumption}%` }}
-                ></div>
-              </div>
-            </div>
-          </div>
+          <p>{waterLevel}%</p>
         </div>
-
-        {/* status board card */}
-
-        <div className="col status-board">
-          <div
-            class="card border-primary mb-3"
-            style={{ "max-width": "18rem" }}
-          >
-            <div class="card-header">Control Pannel</div>
-            <div class="card-body text-primary">
-              <div className="status">
-                <h5>Pump Status: </h5>
-                <span
-                  className="pump-status"
-                  style={{ color: pumpStatus ? "green" : "red" }}
-                >
-                  {pumpStatus ? "ON" : "OFF"}
-                </span>
-              </div>
-              <div className="light-buzzer-container">
-                <h5>Overflow: </h5>
-
-                <div
-                  className="overflow-light"
-                  style={{ backgroundColor: isOverflow ? "red" : "green" }}
-                ></div>
-              </div>
-
-              <div className="water-low">
-                <h5>Water Shortage Buzzer:</h5>
-                {isBuzzed ? (
-                  <div className="water-shortage">
-                    <img src={loud} alt="Buzzered" />
-                  </div>
-                ) : (
-                  <div className="water-shortage">
-                    <img src={silent} alt="Unbuzzered" />
-                  </div>
-                )}
-              </div>
-            </div>
+        <div className="card">
+          <h3>Gas Build-up Level</h3>
+          <div className="progress-bar">
+            <div
+              className="progress-fill"
+              style={{ width: `${gasQuality}%` }}
+            ></div>
+          </div>
+          <p>{Number(gasQuality).toFixed(2)}%</p>
+        </div>
+        <div className="card">
+          <h3>Solar Energy Consumption</h3>
+          <div className="progress-bar">
+            <div
+              className="progress-fill"
+              style={{ width: `${solarEnergyConsumption}%` }}
+            ></div>
+          </div>
+          <p>{Number(solarEnergyConsumption).toFixed(2)}%</p>
+        </div>
+        <div className="card">
+          <h3>Control Panel</h3>
+          <p>
+            <strong>Pump Status:</strong>{" "}
+            <span style={{ color: pumpStatus ? "green" : "red" }}>
+              {pumpStatus ? "ON" : "OFF"}
+            </span>
+          </p>
+          <p>
+            <strong>Overflow:</strong>{" "}
+            <span
+              className={`status-light ${
+                isOverflow ? "red-light" : "green-light"
+              }`}
+            ></span>
+          </p>
+          <p>
+            <strong>Water Shortage Buzzer:</strong>
+          </p>
+          <div>
+            <img
+              src={isBuzzed ? loud : silent}
+              alt="Buzzer"
+              className="buzzer"
+            />
           </div>
         </div>
       </div>
