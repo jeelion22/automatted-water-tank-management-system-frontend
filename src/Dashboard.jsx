@@ -31,6 +31,7 @@ const Dashboard = () => {
         .getProductData()
         .then((result) => {
           const res = result.data.data.data;
+          console.log(result);
           const currentData = res[res.length - 1];
           setWaterLevel(Number(currentData.floatSensor));
           setGasQuality(Number(currentData.gaseSensor / 5000) * 100);
@@ -97,15 +98,18 @@ const Dashboard = () => {
             <div className="card">
               <h3>Control Panel</h3>
 
-              <p className="d-flex justify-content-center align-items-center gap-4">
-                <strong>Device</strong>
-                <span>
+              <div className="toggle-cotainer d-flex justify-content-center align-items-center gap-4 p-2">
+                <div>
+                  <strong>Device</strong>
+                </div>
+
+                <div>
                   <ToggleButton
                     setPumpStatus={setPumpStatus}
                     setIsBuzzed={setIsBuzzed}
                   />
-                </span>
-              </p>
+                </div>
+              </div>
               <p>
                 <strong>Pump Status:</strong>{" "}
                 <span style={{ color: pumpStatus ? "green" : "red" }}>
