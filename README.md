@@ -44,6 +44,8 @@ The below images are about how our web application looks like.
 
 ![dashboard](/src/assets/dashboard.png)
 
+![insights](/src/assets/insights.png)
+
 ## Installation
 
 1. **Clone the repository:**
