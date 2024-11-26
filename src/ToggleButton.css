@@ -1,0 +1,50 @@
+.toggle-outer {
+    width: 60px; 
+    height: 30px; 
+    background-color: rgb(212, 84, 51);
+    border-radius: 15px; 
+    position: relative;
+    padding: 3px; 
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    transition: background-color 0.3s ease;
+  }
+  
+  .toggle-inner {
+    width: 24px; 
+    height: 24px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    position: absolute;
+    transition: transform 0.3s ease;
+  }
+  
+  .toggle-outer.toggled {
+    background-color: green;
+  }
+  
+  .toggle-outer.toggled .toggle-inner {
+    transform: translateX(30px);
+  }
+  
+  .toggle-label {
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    width: 50%; 
+    text-align: center;
+    pointer-events: none; 
+  }
+  
+  .toggle-label.off {
+    left: 25px;
+  }
+  
+  .toggle-label.on {
+    right: 25px; 
+  }
+  
