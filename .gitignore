@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+src/CreateProduct.css
+src/CreateProduct.jsx
+src/assets/iot_img.png

@@ -5,6 +5,7 @@ body {
     padding: 0;
     background-color: #e4e3e9;
     color: #333;
+ 
     
   }
   
@@ -13,6 +14,7 @@ body {
     max-width: 1200px;
     margin: 2rem auto;
     max-height: 100vh;
+   
     background-color: silver;
   }
   
@@ -87,6 +89,21 @@ body {
   .green-light {
     background-color: green;
   }
+
+
+  .status-light.red {
+    background-color: red;
+  }
+
+  .status-light.yellow {
+    background-color: yellow;
+  }
+
+  .status-light.off {
+    background-color: gray;
+  }
+
+
   
   /* Buzzer Image */
   .buzzer {
