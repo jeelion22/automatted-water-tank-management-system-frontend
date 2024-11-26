@@ -1,9 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ToggleButton.css";
 import productServices from "../services/productServices";
 
 const ToggleButton = ({ setPumpStatus, setIsBuzzed }) => {
   const [isToggled, setIsToggled] = useState(false);
+
+  // Loading toggle state from local storage
+  useEffect(() => {
+    const savedState = localStorage.getItem("toggleState");
+    if (savedState !== null) {
+      const parasedState = JSON.parse(savedState);
+      setIsToggled(parasedState);
+      setPumpStatus(parasedState);
+    }
+  }, [setPumpStatus]);
+
+  // saving toggle state in localstorage
+  useEffect(() => {
+    localStorage.setItem("toggleState", JSON.stringify(isToggled));
+  }, [isToggled]);
 
   // handle device start
   const handleDeviceStart = () => {
