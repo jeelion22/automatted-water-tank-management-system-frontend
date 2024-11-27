@@ -4,7 +4,6 @@ import Navbar from "./Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Insights from "./Insights";
-import CreateProduct from "./CreateProduct";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 const App = () => {
@@ -14,7 +13,6 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route index path="/" element={<Dashboard />} />
-          {/* <Route path="create-product" element={<CreateProduct />} /> */}
           <Route path="insights" element={<Insights />} />
         </Routes>
       </BrowserRouter>
