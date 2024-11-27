@@ -29,3 +29,5 @@ src/CreateProduct.jsx
 src/assets/iot_img.png
 src/Chatbot.jsx
 src/Chatbot.css
+
+netlify.toml
