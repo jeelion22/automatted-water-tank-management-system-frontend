@@ -25,6 +25,7 @@ To create this whole UI, react.js is used, to make api calls axios used, and for
 
 - **React**: Used as the main frontend library for building user interfaces.
 - **Axios**: Used for making HTTP requests to the server.
+- **Bootstrap**: For responsivness
 
 ## Application Link
 
@@ -37,6 +38,14 @@ To create this whole UI, react.js is used, to make api calls axios used, and for
 ## Backend Link
 
 [Backend Repository](https://github.com/jeelion22/automatted-water-tank-management-system-backend)
+
+## Colloborators
+
+I sincerely appreciate the following team members for their invaluable contributions to this project:
+
+[Mr. Prakash K](https://github.com/praks8870/my_chatbot_hack) for his efforts in Chatbot integration.
+
+[Mr. Benny](https://github.com/Benny-752/automatted-_water_tank_management_system) for his insights into data analysis.
 
 ## Application Images
 
