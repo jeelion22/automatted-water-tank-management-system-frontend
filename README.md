@@ -44,6 +44,8 @@ To create this whole UI, react.js is used, to make api calls axios used, and for
 
 I sincerely appreciate the following team members for their invaluable contributions to this project:
 
+[Mr. Vijayakrishnan K](#github) for his support.
+
 [Mr. Prakash K](https://github.com/praks8870/my_chatbot_hack) for his efforts in Chatbot integration.
 
 [Mr. Benny](https://github.com/Benny-752/automatted-_water_tank_management_system) for his insights into data analysis.
