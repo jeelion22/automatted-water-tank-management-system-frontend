@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Insights from "./Insights";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import Chatbot from "./Chatbot";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route index path="/" element={<Dashboard />} />
           <Route path="insights" element={<Insights />} />
         </Routes>
+        <Chatbot />
       </BrowserRouter>
     </div>
   );
