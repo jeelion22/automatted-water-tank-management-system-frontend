@@ -27,7 +27,7 @@ dist-ssr
 src/CreateProduct.css
 src/CreateProduct.jsx
 src/assets/iot_img.png
-src/Chatbot.jsx
-src/Chatbot.css
+# src/Chatbot.jsx
+# src/Chatbot.css
 
 netlify.toml
