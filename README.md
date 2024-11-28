@@ -9,6 +9,7 @@ This UI interface is a dashboard for live monitoring for automatted water tank m
 - [Application Link](#application-link)
 - [APIs Link](#apis-link)
 - [Backend Link](#backend-link)
+- [Colloborators](#colloborators)
 - [Application Dashboard](#application-images)
 - [Installation](#installation)
 - [Contribution](#contributing)
