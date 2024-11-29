@@ -1,0 +1,82 @@
+
+.device-edit {
+    width: 100%;
+}
+
+.device-tool-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    
+}
+
+.device-count-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.total-device, .running-device {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(143, 143, 143);
+    color: white;
+    border-radius: 10px;
+    height: 3.24rem;
+    width: 10rem;
+    margin: 0;
+}
+
+.edit-tools  {  
+    display: flex;    
+    justify-content: center;
+    align-items: center;      
+    height: max-content;   
+    width: fit-content;
+    margin-left: auto;
+    background-color: rgb(143, 143, 143);
+    border-radius: 10px;
+    gap: 1rem;
+    padding: 0.5rem;
+    flex-wrap: wrap;
+    
+}
+
+.edit-tools i {
+    position: relative;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}
+
+.edit-tools i:hover, .edit-tools  .active {   
+    bottom: 0.5rem;     
+    transform: scale(1.2);
+   
+}
+
+.edit-tools .active {
+    color: rgba(19, 255, 19, 0.966);
+}
+
+.edit-tools i:nth-child(1):hover {
+    color: rgb(14, 40, 119);
+}
+
+.edit-tools i:nth-child(2):hover {
+    color: rgb(255, 226, 63);
+}
+
+.edit-tools i:nth-child(3):hover {
+    color: rgb(158, 230, 226);
+}
+
+.edit-tools i:nth-child(4):hover {
+    color: rgb(211, 1, 1);
+}
+
+
+

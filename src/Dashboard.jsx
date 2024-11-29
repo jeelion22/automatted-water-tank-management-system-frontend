@@ -4,14 +4,89 @@ import silent from "../src/assets/silent.png";
 import loud from "../src/assets/loud.png";
 import productServices from "../services/productServices";
 import ToggleButton from "./ToggleButton";
+import EditProduct from "./EditProduct";
 
-const Dashboard = () => {
+function DeviceDashboard(selectedProduct) {
+  return (
+    <div className="dashboard-grid">
+      <div className="card">
+        <h3>Live Water Level</h3>
+        <div className="progress-bar">
+          <div
+            className="progress-fill"
+            style={{ width: `${waterLevel}%` }}
+          ></div>
+        </div>
+        <p>{waterLevel}%</p>
+      </div>
+      <div className="card">
+        <h3>Gas Build-up Level</h3>
+        <div className="progress-bar">
+          <div
+            className="progress-fill"
+            style={{ width: `${gasQuality}%` }}
+          ></div>
+        </div>
+        <p>{Number(gasQuality).toFixed(2)}%</p>
+      </div>
+      <div className="card">
+        <h3>Solar Energy Consumption</h3>
+        <div className="progress-bar">
+          <div
+            className="progress-fill"
+            style={{ width: `${solarEnergyConsumption}%` }}
+          ></div>
+        </div>
+        <p>{Number(solarEnergyConsumption).toFixed(2)}%</p>
+      </div>
+      <div className="card">
+        <h3>Control Panel</h3>
+
+        <div className="toggle-cotainer d-flex justify-content-center align-items-center gap-4 p-2">
+          <div>
+            <strong>Device</strong>
+          </div>
+
+          <div>
+            <ToggleButton
+              setPumpStatus={setPumpStatus}
+              setIsBuzzed={setIsBuzzed}
+            />
+          </div>
+        </div>
+        <p>
+          <strong>Pump Status:</strong>{" "}
+          <span style={{ color: pumpStatus ? "green" : "red" }}>
+            {pumpStatus ? "ON" : "OFF"}
+          </span>
+        </p>
+        <p>
+          <strong>Overflow:</strong>{" "}
+          <span
+            className={`status-light ${
+              pumpStatus ? (isOverflow ? "red" : "yellow") : "off"
+            }`}
+          ></span>
+        </p>
+        <p>
+          <strong>Water Shortage Buzzer:</strong>
+        </p>
+        <div>
+          <img src={isBuzzed ? loud : silent} alt="Buzzer" className="buzzer" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const Dashboard = ({ selectedProduct }) => {
   const [pumpStatus, setPumpStatus] = useState(false);
   const [isOverflow, setIsOverflow] = useState(false);
   const [gasQuality, setGasQuality] = useState(0);
   const [waterLevel, setWaterLevel] = useState(0);
   const [solarEnergyConsumption, setSolarEnergyConsumption] = useState(0);
   const [isBuzzed, setIsBuzzed] = useState(false);
+  const [isDeviceCreated, setIsDeviceCreated] = useState(false);
 
   // Fetch data periodically
   useEffect(() => {
@@ -56,86 +131,38 @@ const Dashboard = () => {
     return () => clearInterval(getData);
   }, []);
 
+  useEffect(() => {
+    productServices
+      .checkDeviceRunningStatus(selectedProduct.productID)
+      .catch((error) => {
+        console.log(error);
+        alert(
+          `${error.response.data.message.message}, please create a new device. `
+        );
+        setIsDeviceCreated(false);
+      });
+  }, [selectedProduct]);
+
   return (
     <div className="contrainer dashboard">
       <div className="row">
         <div className="col dashboard-container">
           <header className="dashboard-header">
-            <h1>Automated Water Level Management System</h1>
+            <h1>{selectedProduct?.name?.toString()?.toUpperCase()}</h1>
             <h2>Dashboard</h2>
           </header>
-          <div className="dashboard-grid">
-            <div className="card">
-              <h3>Live Water Level</h3>
-              <div className="progress-bar">
-                <div
-                  className="progress-fill"
-                  style={{ width: `${waterLevel}%` }}
-                ></div>
-              </div>
-              <p>{waterLevel}%</p>
-            </div>
-            <div className="card">
-              <h3>Gas Build-up Level</h3>
-              <div className="progress-bar">
-                <div
-                  className="progress-fill"
-                  style={{ width: `${gasQuality}%` }}
-                ></div>
-              </div>
-              <p>{Number(gasQuality).toFixed(2)}%</p>
-            </div>
-            <div className="card">
-              <h3>Solar Energy Consumption</h3>
-              <div className="progress-bar">
-                <div
-                  className="progress-fill"
-                  style={{ width: `${solarEnergyConsumption}%` }}
-                ></div>
-              </div>
-              <p>{Number(solarEnergyConsumption).toFixed(2)}%</p>
-            </div>
-            <div className="card">
-              <h3>Control Panel</h3>
 
-              <div className="toggle-cotainer d-flex justify-content-center align-items-center gap-4 p-2">
-                <div>
-                  <strong>Device</strong>
-                </div>
-
-                <div>
-                  <ToggleButton
-                    setPumpStatus={setPumpStatus}
-                    setIsBuzzed={setIsBuzzed}
-                  />
-                </div>
-              </div>
-              <p>
-                <strong>Pump Status:</strong>{" "}
-                <span style={{ color: pumpStatus ? "green" : "red" }}>
-                  {pumpStatus ? "ON" : "OFF"}
-                </span>
-              </p>
-              <p>
-                <strong>Overflow:</strong>{" "}
-                <span
-                  className={`status-light ${
-                    pumpStatus ? (isOverflow ? "red" : "yellow") : "off"
-                  }`}
-                ></span>
-              </p>
-              <p>
-                <strong>Water Shortage Buzzer:</strong>
-              </p>
-              <div>
-                <img
-                  src={isBuzzed ? loud : silent}
-                  alt="Buzzer"
-                  className="buzzer"
-                />
-              </div>
-            </div>
+          <div className="product-controller">
+            <EditProduct productID={selectedProduct?.productID} />
           </div>
+
+          {isDeviceCreated ? (
+            <DeviceDashboard />
+          ) : (
+            <div className="no-device-message-container">
+              <p>No devices found, please create a new device </p>
+            </div>
+          )}
         </div>
       </div>
     </div>

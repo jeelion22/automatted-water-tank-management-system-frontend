@@ -6,6 +6,8 @@ import "./App.css";
 import Insights from "./Insights";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import Chatbot from "./Chatbot";
+import CreateProduct from "./CreateProduct";
+import HomaPage from "./HomaPage";
 
 const App = () => {
   return (
@@ -13,7 +15,10 @@ const App = () => {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route index path="/" element={<Dashboard />} />
+          <Route path="/" element={<HomaPage />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
+          <Route path="/create-product" element={<CreateProduct />} />
           <Route path="insights" element={<Insights />} />
         </Routes>
         <Chatbot />

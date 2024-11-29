@@ -22,8 +22,20 @@ const Navbar = () => {
         <div className="nav-list">
           <ul>
             <li>
-              <Link to="/" className={`${active === "/" ? "active" : ""}`}>
+              <Link
+                to="/dashboard"
+                className={`${active === "/dashboard" ? "active" : ""}`}
+              >
                 Dashboard
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                to="/create-product"
+                className={`${active === "/create-product" ? "active" : ""}`}
+              >
+                Create Product
               </Link>
             </li>
 

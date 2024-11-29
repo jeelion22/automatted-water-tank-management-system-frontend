@@ -19,6 +19,10 @@ const device_start = {
 };
 
 const productServices = {
+  createProduct: async (values) => {
+    return await instance.post("/product/create-product", values);
+  },
+
   getProductData: async () => {
     return await instance.post("/product/get-data", {
       productID: "3c5add95-a638-4481-803d-027791a6fd59",
@@ -43,6 +47,21 @@ const productServices = {
       "https://iot1.innotrat.in/api/product/3c5add95-a638-4481-803d-027791a6fd59/stop-device",
 
       device_start
+    );
+  },
+  checkDeviceRunningStatus: async (productID) => {
+    return await instance.post(
+      "https://iot1.innotrat.in/api/product/check/device-running-status",
+      { productID }
+    );
+  },
+
+  createDevice: async (productID, values) => {
+    const deviceCount = values["deviceCount"];
+
+    return await instance.post(
+      `https://iot1.innotrat.in/api/product/${productID}/create-device`,
+      { deviceCount }
     );
   },
 };

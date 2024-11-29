@@ -1,0 +1,10 @@
+.sidebar-container {
+    padding: 20px;
+    margin: 2rem auto;    
+    min-width: max-content;
+    max-height: min-content;
+    background-color: silver;
+    border-radius: 10px;
+    overflow: hidden;
+}
+

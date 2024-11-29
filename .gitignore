@@ -24,8 +24,8 @@ dist-ssr
 *.sw?
 
 
-src/CreateProduct.css
-src/CreateProduct.jsx
+# src/CreateProduct.css
+# src/CreateProduct.jsx
 src/assets/iot_img.png
 # src/Chatbot.jsx
 # src/Chatbot.css

@@ -16,6 +16,7 @@ body {
     max-height: 100vh;
    
     background-color: silver;
+    border-radius: 10px;
   }
   
   .dashboard-header {
@@ -112,3 +113,18 @@ body {
     margin-top: 10px;
   }
   
+
+  .product-controller {   
+    display: flex;   
+    width: 100%;
+    align-items: center;   
+    margin: 0.7rem 0;
+  }
+
+  
+
+  .no-device-message-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
