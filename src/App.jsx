@@ -1,27 +1,58 @@
-import "../node_modules/bootstrap/dist/css/bootstrap.css";
-import Dashboard from "./Dashboard";
-import Navbar from "./Navbar";
+import "bootstrap/dist/css/bootstrap.min.css";
+import bootstrap from "bootstrap/dist/js/bootstrap.bundle";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Insights from "./Insights";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import Chatbot from "./Chatbot";
-import CreateProduct from "./CreateProduct";
-import HomaPage from "./HomaPage";
+import Root from "./Root/Root";
+import UserRegister from "./features/users/UserRegister";
+import UserLogin from "./features/users/UserLogin";
+import { useState } from "react";
+import Toaster from "./components/Toast/Toast";
+import PrivateRoute from "./components/provateRoute/PrivateRoute";
+import Dashboard from "./features/dashboard/Dashboard";
+import Navbar from "./Navbar";
 
 const App = () => {
+  const [toastMessage, setToastMessage] = useState("");
+
+  const triggerToast = (message) => {
+    setToastMessage(message);
+
+    const toast = new bootstrap.Toast(document.getElementById("liveToast"));
+    toast.show();
+  };
+
   return (
     <div className="home-page">
       <BrowserRouter>
-        <Navbar />
         <Routes>
-          <Route path="/" element={<HomaPage />}>
-            <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/" element={<Root />}>
+            <Route
+              path="/register"
+              element={<UserRegister triggerToast={triggerToast} />}
+            />
+            <Route
+              path="/login"
+              element={<UserLogin triggerToast={triggerToast} />}
+            />
           </Route>
-          <Route path="/create-product" element={<CreateProduct />} />
-          <Route path="insights" element={<Insights />} />
+
+          <Route
+            path="dashboard"
+            element={
+              <PrivateRoute>
+                <Navbar triggerToast={triggerToast} />
+
+                {/* <Dashboard /> */}
+              </PrivateRoute>
+            }
+          />
         </Routes>
+
         <Chatbot />
+        <Toaster message={toastMessage} onClose={() => setToastMessage("")} />
       </BrowserRouter>
     </div>
   );

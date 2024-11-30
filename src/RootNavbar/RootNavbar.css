@@ -1,0 +1,10 @@
+.navbar.public a {
+    color: aliceblue;
+}
+
+.navbar.public {
+    background-color: rgb(16, 112, 112);
+    border-radius: 0 0 10px 10px ;
+    
+}
+

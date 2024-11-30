@@ -1,0 +1,11 @@
+.root-container {
+    
+    width: 100vw;
+    height: 100vh;
+}
+
+.root-container .row  {
+    display: flex;
+    justify-content: center;
+ 
+}

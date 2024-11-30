@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
-import silent from "../src/assets/silent.png";
-import loud from "../src/assets/loud.png";
-import productServices from "../services/productServices";
-import ToggleButton from "./ToggleButton";
-import EditProduct from "./EditProduct";
+import silent from "../../../src/assets/silent.png";
+import loud from "../../../src/assets/loud.png";
 
-function DeviceDashboard(selectedProduct) {
+import productServices from "../../../services/productServices";
+import ToggleButton from "../../ToggleButton";
+import EditProduct from "../../EditProduct";
+
+function DeviceDashboard({ selectedProduct }) {
   return (
     <div className="dashboard-grid">
       <div className="card">
@@ -106,7 +107,7 @@ const Dashboard = ({ selectedProduct }) => {
         .getProductData()
         .then((result) => {
           const res = result.data.data.data;
-          console.log(result);
+
           const currentData = res[res.length - 1];
           setWaterLevel(Number(currentData.floatSensor));
           setGasQuality(Number(currentData.gaseSensor / 5000) * 100);
@@ -130,18 +131,6 @@ const Dashboard = ({ selectedProduct }) => {
 
     return () => clearInterval(getData);
   }, []);
-
-  useEffect(() => {
-    productServices
-      .checkDeviceRunningStatus(selectedProduct.productID)
-      .catch((error) => {
-        console.log(error);
-        alert(
-          `${error.response.data.message.message}, please create a new device. `
-        );
-        setIsDeviceCreated(false);
-      });
-  }, [selectedProduct]);
 
   return (
     <div className="contrainer dashboard">

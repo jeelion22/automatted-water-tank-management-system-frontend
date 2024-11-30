@@ -1,0 +1,14 @@
+.toast-container {
+    width: 15rem;
+    
+  
+}
+
+.toast-header {
+    background-color:  rgb(125, 216, 216);
+}
+
+.toast-body {
+    color:  rgb(233, 248, 248);
+    background-color:  rgb(16, 112, 112, 0.9);
+}

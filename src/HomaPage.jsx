@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./HomePage.css";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
-import Dashboard from "./Dashboard";
+import Dashboard from "./features/dashboard/Dashboard";
 
 const HomaPage = () => {
   const [products, setProducts] = useState([]);

@@ -1,0 +1,33 @@
+
+.user-form-container {
+    display: flex;
+    justify-content: center;
+}
+
+
+.form {
+    min-width: fit-content;
+    padding: 1rem;
+    margin: 1.5rem;
+    background-color: rgb(141, 223, 223);
+    border-radius: 10px;
+    overflow: wrap;
+}
+
+.form .btn  {
+    background-color: rgb(16, 112, 112);
+} 
+
+.form i {
+    
+    font-size: 48px;
+    color:  rgb(16, 112, 112);
+  
+   
+}
+
+.form-icon-container {
+    text-align: center;
+}
+
+
