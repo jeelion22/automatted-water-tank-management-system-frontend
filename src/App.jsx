@@ -13,6 +13,9 @@ import Toaster from "./components/Toast/Toast";
 import PrivateRoute from "./components/provateRoute/PrivateRoute";
 import Dashboard from "./features/dashboard/Dashboard";
 import Navbar from "./Navbar";
+import CreateProduct from "./features/product/CreateProduct";
+import Insights from "./Insights";
+import RedirectIfLoggedIn from "./components/redirect/RedirectIfLoggedIn";
 
 const App = () => {
   const [toastMessage, setToastMessage] = useState("");
@@ -40,15 +43,20 @@ const App = () => {
           </Route>
 
           <Route
-            path="dashboard"
+            path="/"
             element={
               <PrivateRoute>
                 <Navbar triggerToast={triggerToast} />
-
-                {/* <Dashboard /> */}
               </PrivateRoute>
             }
-          />
+          >
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route
+              path="create-product"
+              element={<CreateProduct triggerToast={triggerToast} />}
+            />
+            <Route path="insights" element={<Insights />} />
+          </Route>
         </Routes>
 
         <Chatbot />

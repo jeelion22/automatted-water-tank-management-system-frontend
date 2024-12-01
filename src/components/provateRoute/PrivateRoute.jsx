@@ -8,7 +8,7 @@ import {
   selectCurrentUserStatus,
 } from "../../features/users/userSlice";
 import Spinner from "../spinner/Spinner";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 const PrivateRoute = ({ children }) => {
   const user = useSelector(selectCurrentUser);
@@ -19,17 +19,21 @@ const PrivateRoute = ({ children }) => {
 
   useEffect(() => {
     dispatch(getCurrentUser());
-  }, []);
+  }, [dispatch]);
 
-  if (status === "loading") {
+  if (status === "loading" || status === "idle") {
     return <Spinner />;
   }
 
-  if (status === "failed") {
-    return <Navigate to="/login" />;
+  if (status === "failed" || !user) {
+    return <Navigate to="/login" replace />;
   }
 
-  return children;
+  return (
+    <div className="private-container">
+      {children} <Outlet />
+    </div>
+  );
 };
 
 export default PrivateRoute;

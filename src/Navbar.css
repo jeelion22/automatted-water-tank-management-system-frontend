@@ -1,4 +1,23 @@
 
+
+.navbar.private {
+    background-color:rgb(16, 112, 112);
+  
+}
+
+.navbar.private a {
+    color: aliceblue;
+}
+
+.dropdown-menu  {
+    background-color:rgb(16, 112, 112);
+}
+
+.dropdown-menu li a:hover {
+    background-color:rgba(110, 243, 243, 0.5)
+}
+
+
 /* .dropdown-menu {
     right: 0;
     left: auto;

@@ -6,7 +6,7 @@ const Spinner = () => {
     <div className="container">
       <div
         className="row justify-content-center align-items-center"
-        style={{ height: "100%" }}
+        style={{ height: "100vh" }}
       >
         <div className="col text-center">
           <FontAwesomeIcon icon={faSpinner} spinPulse size="4x" />

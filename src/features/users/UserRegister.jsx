@@ -133,7 +133,7 @@ const UserRegister = ({ triggerToast }) => {
                         className="spinner-border spinner-border-sm"
                         area-hidden="true"
                       ></span>
-                      <span role="status">registering...</span>
+                      <span role="status">Registering...</span>
                     </>
                   ) : (
                     "Register"

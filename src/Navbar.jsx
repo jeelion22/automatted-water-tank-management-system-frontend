@@ -1,5 +1,5 @@
 import "./Navbar.css";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import chip from "./assets/chip.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -39,7 +39,7 @@ const Navbar = ({ triggerToast }) => {
   };
 
   return (
-    <nav class="navbar private navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar private navbar-expand-lg ">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           Test IoT
@@ -63,20 +63,20 @@ const Navbar = ({ triggerToast }) => {
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <Link class="nav-link" to={"/dashboard"}>
                 Dashboard
-              </a>
+              </Link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <Link class="nav-link" to={"/create-product"}>
                 Create Product
-              </a>
+              </Link>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <Link class="nav-link" to={"/insights"}>
                 Insights
-              </a>
+              </Link>
             </li>
 
             <li class="nav-item dropdown">
@@ -106,65 +106,6 @@ const Navbar = ({ triggerToast }) => {
         </div>
       </div>
     </nav>
-
-    // <nav className="nav-bar">
-    //   <div className="nav-item">
-    //     <h6>
-    //       Virtual IoT <img src={chip} alt="Microchip" /> Test
-    //     </h6>
-    //   </div>
-    //   <div className="nav-items">
-    //     <div className="nav-list">
-    //       <ul>
-    //         <li>
-    //           <Link
-    //             to="/dashboard"
-    //             className={`${active === "/dashboard" ? "active" : ""}`}
-    //           >
-    //             Dashboard
-    //           </Link>
-    //         </li>
-
-    //         <li>
-    //           <Link
-    //             to="/create-product"
-    //             className={`${active === "/create-product" ? "active" : ""}`}
-    //           >
-    //             Create Product
-    //           </Link>
-    //         </li>
-
-    //         <li>
-    //           <Link
-    //             to="/insights"
-    //             className={`${active === "/insights" ? "active" : ""}`}
-    //           >
-    //             Insights
-    //           </Link>
-    //         </li>
-
-    //         <li class="nav-item dropdown">
-    //           <a
-    //             class="nav-link dropdown-toggle"
-    //             href="#"
-    //             role="button"
-    //             data-bs-toggle="dropdown"
-    //             aria-expanded="false"
-    //           >
-    //             Profile
-    //           </a>
-    //           <ul class="dropdown-menu">
-    //             <li>
-    //               <a class="dropdown-item" href="#">
-    //                 Action
-    //               </a>
-    //             </li>
-    //           </ul>
-    //         </li>
-    //       </ul>
-    //     </div>
-    //   </div>
-    // </nav>
   );
 };
 

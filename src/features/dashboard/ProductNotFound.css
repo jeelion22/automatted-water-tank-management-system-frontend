@@ -1,0 +1,13 @@
+.product-not-found-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    width: 32rem;
+    height: 5rem;   
+    border-radius: 0.5rem;
+    background-color: rgb(2, 190, 181);
+    color: aliceblue;
+    text-align: center;
+    text-wrap: wrap;
+
+}
