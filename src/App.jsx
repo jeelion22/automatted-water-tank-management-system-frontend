@@ -50,7 +50,10 @@ const App = () => {
               </PrivateRoute>
             }
           >
-            <Route path="dashboard" element={<Dashboard />} />
+            <Route
+              path="dashboard"
+              element={<Dashboard triggerToast={triggerToast} />}
+            />
             <Route
               path="create-product"
               element={<CreateProduct triggerToast={triggerToast} />}

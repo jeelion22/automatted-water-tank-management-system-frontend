@@ -7,6 +7,11 @@ const initialState = {
     error: null,
     product: null,
   },
+
+  createDevice: {
+    status: "idle",
+    error: null,
+  },
 };
 
 export const createProduct = createAsyncThunk(
@@ -20,6 +25,21 @@ export const createProduct = createAsyncThunk(
       return response.data;
     } catch (error) {
       rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const createDevice = createAsyncThunk(
+  "/product/createDevice",
+  async ({ productId, deviceCount }, { rejectWithValue }) => {
+    try {
+      const response = await protectedInstance.post(
+        `/product/${productId}/create-device`,
+        deviceCount
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -44,6 +64,18 @@ const productSlice = createSlice({
         state.createProduct.status = "failed";
         state.createProduct.error = action.payload;
         state.createProduct.product = null;
+      })
+      .addCase(createDevice.pending, (state, action) => {
+        state.createDevice.status = "loading";
+        state.createDevice.error = null;
+      })
+      .addCase(createDevice.fulfilled, (state, action) => {
+        state.createDevice.status = "succeeded";
+        state.createDevice.error = null;
+      })
+      .addCase(createDevice.rejected, (state, action) => {
+        state.createDevice.status = "failed";
+        state.createDevice.error = action.payload;
       });
   },
 });
@@ -51,9 +83,17 @@ const productSlice = createSlice({
 export default productSlice.reducer;
 
 // selectors
+
+// product
 export const selectCreateProductStatus = (state) =>
   state.product.createProduct.status;
 export const selectCreateProductError = (state) =>
   state.product.createProduct.error;
 export const selectCreateProduct = (state) =>
   state.product.createProduct.product;
+
+// device
+export const selectDeviceCreateStatus = (state) =>
+  state.product.createDevice.status;
+export const selectDeviceCreateError = (state) =>
+  state.product.createDevice.error;

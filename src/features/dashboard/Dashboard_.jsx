@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Dashboard.css";
+import "./Dashboard_.css";
 import silent from "../../../src/assets/silent.png";
 import loud from "../../../src/assets/loud.png";
 
@@ -80,7 +80,7 @@ function DeviceDashboard({ selectedProduct }) {
   );
 }
 
-const Dashboard = ({ selectedProduct }) => {
+const Dashboard_ = ({ selectedProduct }) => {
   const [pumpStatus, setPumpStatus] = useState(false);
   const [isOverflow, setIsOverflow] = useState(false);
   const [gasQuality, setGasQuality] = useState(0);
@@ -158,4 +158,4 @@ const Dashboard = ({ selectedProduct }) => {
   );
 };
 
-export default Dashboard;
+export default Dashboard_;

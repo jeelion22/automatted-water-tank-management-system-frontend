@@ -1,7 +1,12 @@
 import React from "react";
 
-const DeviceDashboard = () => {
-  return <div>DeviceDashboard</div>;
+const DeviceDashboard = ({ deviceID, productID }) => {
+  return (
+    <div>
+      <p>Product ID: {productID}</p>
+      <p>Device ID: {deviceID}</p>
+    </div>
+  );
 };
 
 export default DeviceDashboard;

@@ -1,0 +1,46 @@
+.product-list {
+    background-color: rgb(40, 231, 199);
+    padding: 1.5rem ;
+    border-radius: 10px;
+    /* min-width: 20rem; */
+   
+}
+
+
+
+.product-list ol li {
+    padding: 0.3rem;
+}
+
+.product-list ol li a {
+    cursor: pointer;
+    padding: 5px 5px;
+
+    text-decoration: none;
+}
+
+ .active {
+    font-weight: bold;
+   
+   
+}
+
+
+.product-btn, .device-btn, .create-device-btn, .list-device-btn {
+border: none;
+background: transparent;
+text-align: start;
+}
+
+.selection {
+    background-color: rgb(141, 223, 223);
+    border-radius: 10px;
+    padding: 1.5rem;
+    height: fit-content;
+   
+}
+
+.device-operations-btns {
+    display: flex;
+    flex-direction: column;
+}
