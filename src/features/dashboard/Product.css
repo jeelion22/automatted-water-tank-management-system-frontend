@@ -26,7 +26,7 @@
 }
 
 
-.product-btn, .device-btn, .create-device-btn, .list-device-btn {
+.product-btn, .device-btn, .create-device-btn, .list-device-btn, .define-product-btn {
 border: none;
 background: transparent;
 text-align: start;
