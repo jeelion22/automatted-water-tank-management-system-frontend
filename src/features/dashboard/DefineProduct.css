@@ -1,0 +1,65 @@
+
+.device-edit {
+    width: 100%;
+}
+
+.device-control-btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    
+}
+
+
+
+
+.edit-tools  {  
+    display: flex;    
+    justify-content: center;
+    align-items: center;      
+    height: max-content;   
+    width: fit-content;
+    margin-left: auto;
+    background-color: rgb(14, 180, 139);
+    border-radius: 10px;
+    gap: 1rem;
+    padding: 0.5rem;
+    flex-wrap: wrap;
+    
+}
+
+.edit-tools i {
+    position: relative;
+    font-size: 24px;   
+    cursor: pointer;
+}
+
+.edit-tools i:hover, .edit-tools  .active {   
+    bottom: 0.5rem;     
+    transform: scale(1.2);
+   
+}
+
+/* .edit-tools .active {
+    color: rgba(19, 255, 19, 0.966);
+} */
+
+.edit-tools i:nth-child(1) {
+    color: rgb(6, 51, 184);
+}
+
+.edit-tools i:nth-child(2) {
+    color: rgb(255, 226, 63);
+}
+
+.edit-tools i:nth-child(3) {
+    color: rgb(65, 58, 78);
+}
+
+.edit-tools i:nth-child(4) {
+    color: rgb(211, 1, 1);
+}
+
+
+
