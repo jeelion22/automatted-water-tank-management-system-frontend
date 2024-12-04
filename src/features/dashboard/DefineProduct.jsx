@@ -3,10 +3,10 @@ import "./DefineProduct.css";
 import EditComponents from "../../EditComponents";
 import RemoveComponents from "../../RemoveComponents";
 import RemoveAllComponents from "../../RemoveAllComponents";
-import CreateProductDefinition from "../../CreateProductDefinition";
+import CreateProductDefinition_ from "../../CreateProductDefinition_";
 
 const componentMapping = {
-  CreateProductDefinition,
+  CreateProductDefinition_,
   EditComponents,
   RemoveComponents,
   RemoveAllComponents,
@@ -27,10 +27,10 @@ const DefineProduct = ({ productID }) => {
       <div className="device-control-btns edit-tools">
         <i
           className={`bi bi-plus-square ${
-            activeComponent === "CreateProductDefintion" ? "active" : ""
+            activeComponent === "CreateProductDefinition_" ? "active" : ""
           }`}
           title="create product definition"
-          onClick={() => handleEdit("CreateProductDefinition")}
+          onClick={() => handleEdit("CreateProductDefinition_")}
         ></i>
 
         <i

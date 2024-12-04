@@ -20,6 +20,7 @@ const Product = ({ products, triggerToast }) => {
       setProductID(product.productID);
       setCreateDevice(false);
       setDeviceID("");
+      setDefineProduct(false);
     }
   };
 
@@ -134,7 +135,7 @@ const Product = ({ products, triggerToast }) => {
 
         {/* Right Content Section */}
 
-        {defineProduct && !deviceID && (
+        {defineProduct && productID && !deviceID && (
           <div className="col-md-12 col-sm-12 col-lg-6 selection">
             <DefineProduct productID={productID} triggerToast={triggerToast} />
           </div>
