@@ -28,7 +28,7 @@ const Product = ({ products, triggerToast }) => {
     <div className="product-container w-100 ">
       <div className="row justify-content-center gap-2 p-2">
         {/* Product List */}
-        <div className="col-md-12 col-sm-12 col-lg-5 product-list">
+        <div className="col-md-12 col-sm-12 col-lg-6 product-list">
           <h5>Products</h5>
           <ol>
             {products.map((product, index) => (

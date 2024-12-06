@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-
-// const componentsAvailable = ["Sensors"];
 
 const components = {
   Sensors: {
     "Gas Sensor": { unit: ["PPM"], min: "", max: "" },
-
     "Temperature Sensor": {
       unit: ["Celsius", "Fahrenheit"],
       min: "",
@@ -16,147 +13,179 @@ const components = {
   },
 };
 
-const CreateProductDefinition = ({ productID }) => {
+const CreateProductDefinition = ({
+  deviceID,
+  initialValues,
+  setInitialValues,
+}) => {
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [selectedComponentType, setSelectedComponentType] = useState(null);
-  const [selectedComponentUnit, setSelectedComponentUnit] = useState(null);
 
-  const initialValues = {
-    productID: productID,
-    components: {},
+  const initialValues_ = {
+    deviceID: deviceID,
+    componentName: "",
+    componentType: "",
+    unit: "",
+    min: "",
+    max: "",
+  };
+
+  const handleSubmit = (values) => {
+    const result = {
+      component: {
+        name: values.componentName,
+        type: values.componentType,
+        deviceID: values.deviceID,
+        unit: values.unit,
+        min: values.min,
+        max: values.max,
+      },
+    };
+
+    setInitialValues((prev) => ({
+      ...prev,
+      components: {
+        [values.componentName]: {
+          type: values.componentType,
+          deviceID: values.deviceID,
+          unit: values.unit,
+          min: values.min,
+          max: values.max,
+        },
+      },
+    }));
+
+    console.log(result);
   };
 
   return (
     <div className="components-container">
-      <Formik
-        initialValues={initialValues}
-        enableReinitialize
-        onSubmit={(values) => console.log(values)}
-      >
+      <Formik initialValues={initialValues_} onSubmit={handleSubmit}>
         {(formik) => (
           <Form>
-            {/* Product ID field */}
+            {/* Device ID field */}
             <div className="form-floating mb-3">
               <Field
                 type="text"
                 className="form-control"
-                name="productID"
-                id="productID"
+                name="deviceID"
+                id="deviceID"
                 disabled
               />
-              <label htmlFor="productID">Product ID</label>
+              <label htmlFor="deviceID">Device ID</label>
               <ErrorMessage
-                name="productID"
+                name="deviceID"
                 className="text-danger"
                 component="div"
               />
             </div>
-            {/* Component Selection */}
+
+            {/* Component Name Selection */}
             <div className="form-floating mb-3">
               <Field
                 as="select"
-                name="selectedComponent"
+                name="componentName"
                 className="form-control"
-                id="components"
+                id="componentName"
                 onChange={(e) => {
-                  const component = e.target.value;
-                  setSelectedComponent(component);
+                  const componentName = e.target.value;
+                  formik.setFieldValue("componentName", componentName);
+                  setSelectedComponent(componentName);
                 }}
               >
                 <option value="" disabled selected>
-                  -- Select Component --
+                  -- Select Component Name --
                 </option>
-                {Object.keys(components).map((component, index) => (
-                  <option key={index} value={component}>
-                    {component}
+                {Object.keys(components).map((componentName, index) => (
+                  <option key={index} value={componentName}>
+                    {componentName}
                   </option>
                 ))}
               </Field>
-              <label htmlFor="components">Select Component</label>
+              <label htmlFor="componentName">Component Name</label>
             </div>
 
-            {/* select component type */}
-
+            {/* Component Type Selection */}
             {selectedComponent && (
               <div className="form-floating mb-3">
                 <Field
                   as="select"
-                  name="type"
+                  name="componentType"
                   className="form-control"
-                  id="type"
+                  id="componentType"
                   onChange={(e) => {
-                    const type = e.target.value;
-                    setSelectedComponentType(type);
+                    const componentType = e.target.value;
+                    formik.setFieldValue("componentType", componentType);
+                    setSelectedComponentType(componentType);
                   }}
                 >
+                  <option value="" disabled selected>
+                    -- Select Component Type --
+                  </option>
                   {Object.keys(components[selectedComponent]).map(
-                    (type, index) => (
-                      <option key={index} value={type}>
-                        {type}
+                    (componentType, index) => (
+                      <option key={index} value={componentType}>
+                        {componentType}
                       </option>
                     )
                   )}
                 </Field>
-                <label htmlFor="components">Select Component Type</label>
+                <label htmlFor="componentType">Component Type</label>
               </div>
             )}
 
+            {/* Unit, Min, Max Fields */}
             {selectedComponentType && (
               <div className="measurement-container">
+                {/* Unit */}
                 <div className="form-floating mb-3">
                   <Field
                     as="select"
                     name="unit"
                     className="form-control"
                     id="unit"
-                    onChange={(e) => {
-                      const unit = e.target.value;
-                      setSelectedComponentUnit(unit);
-                    }}
                   >
+                    <option value="" disabled selected>
+                      -- Select Unit --
+                    </option>
                     {components[selectedComponent][
                       selectedComponentType
-                    ].unit.map((type, index) => (
-                      <option key={index} value={type}>
-                        {type}
+                    ].unit.map((unit, index) => (
+                      <option key={index} value={unit}>
+                        {unit}
                       </option>
                     ))}
                   </Field>
-                  <label htmlFor="unit">Select Unit</label>
+                  <label htmlFor="unit">Unit</label>
                 </div>
 
+                {/* Minimum */}
                 <div className="form-floating mb-3">
                   <Field
                     type="number"
                     name="min"
                     className="form-control"
                     id="min"
-                    onChange={(e) => {
-                      const min = e.target.value;
-                    }}
                   />
-
                   <label htmlFor="min">Minimum</label>
                 </div>
 
+                {/* Maximum */}
                 <div className="form-floating mb-3">
                   <Field
                     type="number"
                     name="max"
                     className="form-control"
                     id="max"
-                    onChange={(e) => {
-                      const max = e.target.value;
-                    }}
                   />
-
                   <label htmlFor="max">Maximum</label>
                 </div>
               </div>
             )}
 
-            <button type="submit" className="btn btn-dark w-100">
-              Submit
+            {/* Submit Button */}
+            <button type="submit" className="btn">
+              Add
             </button>
           </Form>
         )}
