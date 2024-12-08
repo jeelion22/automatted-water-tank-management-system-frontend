@@ -1,7 +1,7 @@
 import "./IoTComponents.css";
 import { electronicComponents } from "./features/dashboard/electronicComponents";
 import { useEffect, useState } from "react";
-import { Formik, Field, Form, FieldArray } from "formik";
+import { Formik, Field, Form, FieldArray, ErrorMessage } from "formik";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "./features/users/userSlice";
 import * as Yup from "yup";
@@ -13,6 +13,9 @@ const IoTComponents = ({ productID }) => {
     components: [],
   });
 
+  const [selectedDeviceIDs, setSelectedDeviceIDs] = useState({});
+
+  // yup validation schema
   const validationSchema = Yup.object().shape({
     productID: Yup.string().required("Product ID is required"),
     components: Yup.array().of(
@@ -106,7 +109,9 @@ const IoTComponents = ({ productID }) => {
 
   return (
     <div className="m-4 rounded p-4  border ">
-      <h3 className="m-4 text-dark">Define Your IoT's Components</h3>
+      <h3 className="m-4 text-dark text-center">
+        Define Your IoT's Components
+      </h3>
 
       <Formik
         initialValues={initialValues}
@@ -125,6 +130,12 @@ const IoTComponents = ({ productID }) => {
                 name="productID"
               />
               <label htmlFor="productID">Product ID</label>
+
+              <ErrorMessage
+                name="productID"
+                component="div"
+                className="text-danger"
+              />
             </div>
 
             <FieldArray
@@ -155,13 +166,26 @@ const IoTComponents = ({ productID }) => {
                               as="select"
                               name={`components[${index}].deviceID`}
                               className="form-select"
+                              onChange={(e) => {
+                                formik.handleChange(e);
+                                setSelectedDeviceIDs((prev) => ({
+                                  ...prev,
+                                  [index]: e.target.value,
+                                }));
+                              }}
                             >
                               <option value="" disabled>
                                 -- Select Device ID --
                               </option>
 
                               {deviceIDs.map((deviceID, index) => (
-                                <option key={index} value={deviceID}>
+                                <option
+                                  key={index}
+                                  value={deviceID}
+                                  disabled={Object.values(
+                                    selectedDeviceIDs
+                                  ).includes(deviceID)}
+                                >
                                   {deviceID}
                                 </option>
                               ))}
@@ -170,6 +194,12 @@ const IoTComponents = ({ productID }) => {
                             <label htmlFor={`components[${index}].deviceID`}>
                               Device ID
                             </label>
+
+                            <ErrorMessage
+                              name={`components[${index}].deviceID`}
+                              component="div"
+                              className="text-danger"
+                            />
                           </div>
                           {/* Type select */}
                           <div className="form-floating mb-3">
@@ -208,6 +238,12 @@ const IoTComponents = ({ productID }) => {
                             >
                               Component Type
                             </label>
+
+                            <ErrorMessage
+                              name={`components[${index}].componentType`}
+                              component="div"
+                              className="text-danger"
+                            />
                           </div>
                           {component.componentType && (
                             <div className="form-floating mb-3">
@@ -270,6 +306,12 @@ const IoTComponents = ({ productID }) => {
                               >
                                 Component Name
                               </label>
+
+                              <ErrorMessage
+                                name={`components[${index}].componentName`}
+                                component="div"
+                                className="text-danger"
+                              />
                             </div>
                           )}
                           {/* Unit selection */}
@@ -305,6 +347,12 @@ const IoTComponents = ({ productID }) => {
                               <label htmlFor={`components[${index}].unit`}>
                                 Select Unit
                               </label>
+
+                              <ErrorMessage
+                                name={`components[${index}].unit`}
+                                component="div"
+                                className="text-danger"
+                              />
                             </div>
                           )}
 
@@ -320,6 +368,12 @@ const IoTComponents = ({ productID }) => {
                               <label htmlFor={`components[${index}].min`}>
                                 Mininum
                               </label>
+
+                              <ErrorMessage
+                                name={`components[${index}].min`}
+                                component="div"
+                                className="text-danger"
+                              />
                             </div>
                           )}
 
@@ -333,6 +387,12 @@ const IoTComponents = ({ productID }) => {
                               <label htmlFor={`components[${index}].max`}>
                                 Maximum
                               </label>
+
+                              <ErrorMessage
+                                name={`components[${index}].max`}
+                                component="div"
+                                className="text-danger"
+                              />
                             </div>
                           )}
 
@@ -344,6 +404,12 @@ const IoTComponents = ({ productID }) => {
                                 name={`components[${index}].state`}
                               />
                               <label className="form-check-lable">State</label>
+
+                              <ErrorMessage
+                                name={`components[${index}].state`}
+                                component="div"
+                                className="text-danger"
+                              />
                             </div>
                           )}
 
@@ -363,7 +429,7 @@ const IoTComponents = ({ productID }) => {
 
                   {/* add component btn */}
                   <button
-                    className="btn btn-success mb-3"
+                    className="btn btn-success mb-3 w-100"
                     type="button"
                     onClick={() =>
                       helperMethod.push({
@@ -386,7 +452,7 @@ const IoTComponents = ({ productID }) => {
               )}
             />
 
-            <button type="submit" className="btn  btn-light mb-3 ">
+            <button type="submit" className="btn  mb-3 w-100">
               Submit
             </button>
           </Form>
