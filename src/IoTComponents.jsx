@@ -4,12 +4,49 @@ import { useEffect, useState } from "react";
 import { Formik, Field, Form, FieldArray } from "formik";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "./features/users/userSlice";
+import * as Yup from "yup";
 
 const IoTComponents = ({ productID }) => {
   const [visibleComponents, setVisibleComponents] = useState([]);
   const [initialValues, setInitialValues] = useState({
     productID: productID,
     components: [],
+  });
+
+  const validationSchema = Yup.object().shape({
+    productID: Yup.string().required("Product ID is required"),
+    components: Yup.array().of(
+      Yup.object().shape({
+        deviceID: Yup.string().required("Device ID is required"),
+        componentType: Yup.string().required("Component type is required"),
+        componentName: Yup.string().required("Component name is required"),
+        unit: Yup.string().required("Component unit is required"),
+
+        min: Yup.number()
+          .nullable()
+          .when("state", {
+            is: null,
+            then: Yup.number().required("Minimum value is required"),
+          }),
+
+        max: Yup.number()
+          .nullable()
+          .when("state", {
+            is: null,
+            then: Yup.number().required("Maximum value is required"),
+          })
+          .test(
+            "max-greater-than-min",
+            "Max value must be greater than Min value",
+            function (value) {
+              const { min } = this.parent;
+              return min === null || value === null || value > min;
+            }
+          ),
+
+        state: Yup.mixed().nullable(),
+      })
+    ),
   });
 
   // handle component visibility
@@ -58,7 +95,7 @@ const IoTComponents = ({ productID }) => {
   // update initial values productID changes
   useEffect(() => {
     const exisitingComponents =
-      user.products.find((product) => product.productID === productID)
+      user?.products?.find((product) => product.productID === productID)
         ?.components || [];
 
     setInitialValues({
@@ -73,6 +110,7 @@ const IoTComponents = ({ productID }) => {
 
       <Formik
         initialValues={initialValues}
+        validationSchema={validationSchema}
         onSubmit={(values) => {
           convertDataToAPIFormat(values);
         }}
