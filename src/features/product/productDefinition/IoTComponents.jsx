@@ -1,9 +1,9 @@
 import "./IoTComponents.css";
-import { electronicComponents } from "./features/dashboard/electronicComponents";
+import { electronicComponents } from "../../dashboard/electronicComponents";
 import { useEffect, useState } from "react";
 import { Formik, Field, Form, FieldArray, ErrorMessage } from "formik";
 import { useSelector } from "react-redux";
-import { selectCurrentUser } from "./features/users/userSlice";
+import { selectCurrentUser } from "../../users/userSlice";
 import * as Yup from "yup";
 
 const IoTComponents = ({ productID }) => {
@@ -18,38 +18,44 @@ const IoTComponents = ({ productID }) => {
   // yup validation schema
   const validationSchema = Yup.object().shape({
     productID: Yup.string().required("Product ID is required"),
-    components: Yup.array().of(
-      Yup.object().shape({
-        deviceID: Yup.string().required("Device ID is required"),
-        componentType: Yup.string().required("Component type is required"),
-        componentName: Yup.string().required("Component name is required"),
-        unit: Yup.string().required("Component unit is required"),
+    components: Yup.array()
+      .of(
+        Yup.object().shape({
+          deviceID: Yup.string().required("Device ID is required"),
+          componentType: Yup.string().required("Component type is required"),
+          componentName: Yup.string().required("Component name is required"),
+          unit: Yup.string().required("Component unit is required"),
 
-        min: Yup.number()
-          .nullable()
-          .when("state", {
-            is: null,
-            then: Yup.number().required("Minimum value is required"),
-          }),
+          min: Yup.number()
+            .nullable()
+            .when("state", {
+              is: null,
+              then: Yup.number().required("Minimum value is required"),
+            }),
 
-        max: Yup.number()
-          .nullable()
-          .when("state", {
-            is: null,
-            then: Yup.number().required("Maximum value is required"),
-          })
-          .test(
-            "max-greater-than-min",
-            "Max value must be greater than Min value",
-            function (value) {
-              const { min } = this.parent;
-              return min === null || value === null || value > min;
-            }
-          ),
+          max: Yup.number()
+            .nullable()
+            .when("state", {
+              is: null,
+              then: Yup.number().required("Maximum value is required"),
+            })
+            .test(
+              "max-greater-than-min",
+              "Max value must be greater than Min value",
+              function (value) {
+                const { min } = this.parent;
+                return min === null || value === null || value > min;
+              }
+            ),
 
-        state: Yup.mixed().nullable(),
-      })
-    ),
+          state: Yup.mixed().nullable(),
+        })
+      )
+      .test(
+        "Components-contains-items",
+        "Components should not be empty",
+        (value) => value.length > 0
+      ),
   });
 
   // handle component visibility
@@ -455,6 +461,12 @@ const IoTComponents = ({ productID }) => {
             <button type="submit" className="btn  mb-3 w-100">
               Submit
             </button>
+
+            <ErrorMessage
+              name="components"
+              component="div"
+              className="text-danger"
+            />
           </Form>
         )}
       </Formik>

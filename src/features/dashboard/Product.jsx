@@ -1,8 +1,8 @@
 import "./Product.css";
 import React, { useState } from "react";
-import CreateDevice from "./CreateDevice";
+import CreateDevice from "../device/createDevice/CreateDevice";
 import DeviceDashboard from "./DeviceDashboard";
-import DefineProduct from "./DefineProduct";
+import DefineProduct from "../product/productDefinition//DefineProduct";
 
 const Product = ({ products, triggerToast }) => {
   const [productID, setProductID] = useState("");

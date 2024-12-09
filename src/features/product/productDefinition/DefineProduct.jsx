@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./DefineProduct.css";
-import EditComponents from "../../EditComponents";
-import RemoveComponents from "../../RemoveComponents";
-import RemoveAllComponents from "../../RemoveAllComponents";
+import EditComponents from "../editProduct/EditComponents";
+import RemoveComponents from "../editProduct/RemoveComponents";
+import RemoveAllComponents from "../editProduct/RemoveAllComponents";
 
-import IoTComponents from "../../IoTComponents";
+import IoTComponents from "./IoTComponents";
 
 const componentMapping = {
   IoTComponents,

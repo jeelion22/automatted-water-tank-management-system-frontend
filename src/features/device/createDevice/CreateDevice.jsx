@@ -1,14 +1,14 @@
 import "./CreateDevice.css";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import productServices from "../../../services/productServices";
+import productServices from "../../../../services/productServices";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createDevice,
   selectDeviceCreateStatus,
-} from "../product/productSlice";
+} from "../../product/productSlice";
 
-import { getCurrentUser } from "../users/userSlice";
+import { getCurrentUser } from "../../users/userSlice";
 
 const CreateDevice = ({ productID, triggerToast }) => {
   const status = useSelector(selectDeviceCreateStatus);

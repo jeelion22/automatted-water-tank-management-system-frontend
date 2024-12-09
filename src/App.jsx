@@ -13,7 +13,8 @@ import Toaster from "./components/Toast/Toast";
 import PrivateRoute from "./components/provateRoute/PrivateRoute";
 import Dashboard from "./features/dashboard/Dashboard";
 import Navbar from "./Navbar";
-import CreateProduct from "./features/product/CreateProduct";
+import CreateProduct from "./features/product/createProduct/CreateProduct";
+
 import Insights from "./Insights";
 import RedirectIfLoggedIn from "./components/redirect/RedirectIfLoggedIn";
 
